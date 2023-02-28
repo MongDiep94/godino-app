@@ -16,12 +16,12 @@
   color: white;
   padding: 8px 24px;
   border-radius: 4px;
-  background: $blue;
+  background: $orange;
   transition: background 0.3s ease;
 }
 
 .btn-flat:hover {
-  background: $blue;
+  background: $dark-orange;
   color: white;
 }
 
@@ -30,12 +30,12 @@
   padding: 8px 24px;
   border-radius: 4px;
   font-weight: bold;
-  background: linear-gradient($light-blue, $blue);
+  background: linear-gradient($orange, $dark-orange);
   transition: background 0.3s ease;
   border: 1px solid $blue;
 }
 
 .btn-gradient:hover {
-  background: linear-gradient($light-blue, $blue);
+  background: linear-gradient($orange, $dark-orange);
   color: white;
 }
