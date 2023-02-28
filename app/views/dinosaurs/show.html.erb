@@ -1,0 +1,9 @@
+
+
+
+
+<% if policy(@dinosaur).edit? %>
+  <%= link_to "Edit your Dinosaur's profile", edit_dinosaur_path(@dinosaur) %> |
+<% end %>
+<!-- [...] -->
+<%= button_to "Destroy this Dinosaur from the platform", @dinosaur, method: :delete if policy(@dinosaur).destroy? %>
