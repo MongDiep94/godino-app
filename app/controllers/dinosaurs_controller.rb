@@ -8,8 +8,11 @@ class DinosaursController < ApplicationController
     authorize @dinosaur
     @dinosaur = Dinosaur.new(dinosaurs_params)
     @dinosaur.user = current_user
-    @dinosaur.save
-    redirect_to dinausaur_path(@dinosaur)
+    if @dinosaur.save
+      redirect_to dinausaur_path(@dinosaur)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def index
