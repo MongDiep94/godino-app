@@ -2,6 +2,7 @@ class BookingsController < ApplicationController
 
   def new
     authorize @booking
+    @dinosaur = Dinosaur.find(params[:dinosaur_id])
     @booking = Booking.new
   end
 
@@ -19,8 +20,11 @@ class BookingsController < ApplicationController
     authorize @booking
     @booking = Booking.new(bookings_params)
     @booking.user = current_user
-    @booking.save
-    redirect_to booking_path(@booking)
+    if @booking.save
+      redirect_to booking_path(@booking)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def accept
