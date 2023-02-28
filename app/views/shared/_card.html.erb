@@ -1,0 +1,25 @@
+<div class="container-card">
+  <div class="cards">
+    <% @dinosaurs[0..5].each do |dino| %>
+      <div class="card-dino">
+        <%= cl_image_tag dino.photo.key, crop: :fill%>
+        <div class="card-dino-infos">
+          <div>
+            <h2><%= dino.name%></h2>
+              <ul>
+                <li><strong>Species : </strong><%= dino.species%></li>
+                <li><strong>Character : </strong><%= dino.character%></li>
+              </ul>
+          </div>
+          <div>
+          <h2 id="card-dino-pricing">€<%= dino.price%>/day</h2>
+            <ul class="list-inline">
+              <li class="list-inline-item"><i class="fa-regular fa-heart"></i></li>
+              <li class="list-inline-item"><i class="fa-solid fa-stars"><%= dino.review%></i></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
