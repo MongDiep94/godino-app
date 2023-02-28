@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_28_113156) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_28_144511) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +49,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_113156) do
     t.bigint "dinosaur_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "rating"
     t.index ["dinosaur_id"], name: "index_bookings_on_dinosaur_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
@@ -55,9 +60,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_113156) do
   create_table "dinosaurs", force: :cascade do |t|
     t.integer "height"
     t.integer "price"
-    t.integer "review"
-    t.date "availability_start"
-    t.date "availability_end"
     t.bigint "user_id", null: false
     t.integer "weight"
     t.string "element"
@@ -65,6 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_113156) do
     t.string "character"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "review"
     t.string "address"
     t.string "photo_url"
     t.string "name"
@@ -82,6 +85,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_113156) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
+    t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

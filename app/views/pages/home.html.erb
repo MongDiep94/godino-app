@@ -1,8 +1,17 @@
-<h1>Bienvenue à Jurassic Paris</h1>
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://unsplash.com/fr/photos/eP2885MMLmo);">
-  <div class="container">
-    <h1>Le Wagon brings <strong>tech skills</strong> to <strong>creative people</strong>!</h1>
-    <p>Change your life and learn to code at one of our campuses around the world.</p>
-    <a class="btn btn-flat" href="#">Apply now</a>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,0.0)), url(<%= image_path 'jp_banner_2000x1000.jpg'%>);">
+  <div class="container-banner">
+    <h1>Welcome to <strong>Jurassic Paris</strong></h1>
+    <p>Change your life style and feel the extraordinary.</p>
+
+    <%= simple_form_for :search, url: root_path, method: :get do |f| %>
+      <div class="search-form-control form-group", style="margin-bottom: 20px" >
+        <input class="form-control string required" type="text" name="search[query]" id="search_query" placeholder="Search for a Dino nearby"/>
+        <button name="button" type="submit" class="btn btn-flat">
+          <i class="fas fa-search"></i> Search
+        </button>
+      </div>
+    <% end %>
+    <%= link_to "Hug a Dino for a week!", dinosaurs_path, class: "btn btn-flat" %>
+
   </div>
 </div>
