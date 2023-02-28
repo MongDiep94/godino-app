@@ -3,7 +3,6 @@ class PagesController < ApplicationController
 
   def home
     @dinosaurs = Dinosaur.all
-    raise
   end
 
   def dashboard
