@@ -9,7 +9,7 @@ class DinosaursController < ApplicationController
     @dinosaur = Dinosaur.new(dinosaurs_params)
     @dinosaur.user = current_user
     @dinosaur.save
-    redirect_to dinausor_path(@dinosaur)
+    redirect_to dinausaur_path(@dinosaur)
   end
 
   def index
