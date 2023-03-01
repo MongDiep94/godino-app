@@ -1,10 +1,10 @@
 
 <div class = "container">
-  <div class ="row mt-3">
+  <div class ="row mt-3 mb-3">
     <div class="col-9">
       <%= cl_image_tag @dinosaur.photo.key, crop: :fill, class: :profile_picture %>
       <div class = "row justify-content-start align-items-center">
-        <h1 class="col-7 mb-3 mt-3"><%=@dinosaur.name%>, the <%=@dinosaur.species.capitalize%></h1>
+        <h1 class="col-10 mb-3 mt-3"><%=@dinosaur.name%>, the <%=@dinosaur.species.capitalize%></h1>
         <h3 class="col mb-3 mt-3 justify-content-right">⭐ <%= @dinosaur.review%>/5</h3>
       </div>
         <ul class="list-group list-group-horizontal">
@@ -30,10 +30,48 @@
             <span><i class="fa-solid fa-heart-circle-exclamation"></i> <%= @dinosaur.character.capitalize %></span>
           </li>
         </ul>
-      <hr class="rounded mt-6 mb-3">
+        <div class="text-divider">
+          <hr class="rounded mt-3">
+        </div>
       <div class="row mb-10">
-        <h6> <strong>20 Comments</strong></h6>
-        <img src="" alt="">
+        <h6 class="mt-3"> <strong>4 Comments</strong></h6>
+        <div class="row align-items-center mb-3 mt-3">
+          <div class="col-6">
+            <div class = "row align-items-baseline">
+              <i class="fa-regular fa-face-smile fa-2xl col-auto align-self-center"></i>
+              <p class="col text-justify">Suspendisse porta enim a libero congue, ut consectetur tellus volutpat. Nam quis dolor in arcu aliquet dignissim. Maecenas ultricies feugiat odio, in finibus nulla accumsan vel. Praesent fermentum et velit sit amet imperdiet.</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class = "row align-items-baseline">
+              <i class="fa-regular fa-face-smile fa-2xl col-auto align-self-center"></i>
+              <p class="col text-justify">Suspendisse porta enim a libero congue, ut consectetur tellus volutpat. Nam quis dolor in arcu aliquet dignissim. Maecenas ultricies feugiat odio, in finibus nulla accumsan vel. Praesent fermentum et velit sit amet imperdiet.</p>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-6">
+            <div class = "row align-items-baseline">
+              <i class="fa-regular fa-face-smile fa-2xl col-auto align-self-center"></i>
+              <p class="col text-justify">Suspendisse porta enim a libero congue, ut consectetur tellus volutpat. Nam quis dolor in arcu aliquet dignissim. Maecenas ultricies feugiat odio, in finibus nulla accumsan vel. Praesent fermentum et velit sit amet imperdiet.</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class = "row align-items-baseline">
+              <i class="fa-regular fa-face-smile fa-2xl col-auto align-self-center"></i>
+              <p class="col text-justify">Suspendisse porta enim a libero congue, ut consectetur tellus volutpat. Nam quis dolor in arcu aliquet dignissim. Maecenas ultricies feugiat odio, in finibus nulla accumsan vel. Praesent fermentum et velit sit amet imperdiet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-divider mt-3">
+        <hr class="rounded">
+      </div>
+      <h6><i class="fa-solid fa-binoculars mt-2 mb-2"></i> Where can I find <%= @dinosaur.name%>?</h6>
+      <div style="width: 800px; height: 400px; border-radius:5px;"
+        data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
       </div>
     </div>
     <div class="col-3 p-4" id="bookingform">
@@ -44,7 +82,7 @@
           </div>
           <div class="row align-items-center">
               <h6 class="col-4">⭐ <strong><%= @dinosaur.review %>/5</strong></h6>
-              <h6 class="col-6">20 comments</h6>
+              <h6 class="col-6">4 comments</h6>
           </div>
           <hr class="rounded mt-3 mb-3">
           <div>
@@ -52,15 +90,10 @@
                 <%= f.input :start_date %>
                 <%= f.input :end_date %>
                 <div class="d-grid gap-2 pt-3 mb-0">
-                <%= f.submit "BOOK", class: "btn btn-dark" %>
+                <%= f.submit "BOOK", class: "btn-flat" %>
               <% end %>
           </div>
       </div>
     </div>
-  </div>
-  <div style="width: 100%; height: 400px; margin:10px; border-radius:5px;"
-      data-controller="map"
-      data-map-markers-value="<%= @markers.to_json %>"
-      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
 </div>
