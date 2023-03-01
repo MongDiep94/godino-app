@@ -28,3 +28,7 @@
 .footer-copyright {
   color: $light-gray;
 }
+
+.page-height {
+  min-height: calc(100vh - 140px);
+}
