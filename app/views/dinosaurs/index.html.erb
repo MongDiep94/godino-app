@@ -1,4 +1,5 @@
 
+
 <%= render "shared/card"  %>
 
 <%= link_to "New Dinosaur", new_dinosaur_path if policy(Dinosaur).new? %>
@@ -7,3 +8,4 @@
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+

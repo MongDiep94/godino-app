@@ -1,6 +1,7 @@
 <div class="container-card">
   <div class="cards">
     <% @dinosaurs.each do |dino| %>
+    <%= link_to dinosaur_path(dino) do %>
       <div class="card-dino">
       <% if dino.photo.attached? %>
         <%= cl_image_tag dino.photo.key, crop: :fill%>
@@ -22,6 +23,14 @@
           </div>
         </div>
       </div>
+      <% end %>
     <% end %>
   </div>
+</div>
+</div>
+
+  <div class="btn-new w-25">
+  <% if policy(Dinosaur).new? %>
+<%= link_to "New Dinosaur", new_dinosaur_path, class: "btn-new" %>
+<% end %>
 </div>

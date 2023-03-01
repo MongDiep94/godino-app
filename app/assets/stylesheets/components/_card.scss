@@ -8,6 +8,7 @@
   overflow: hidden;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 4px;
 }
 
 .card-dino > img {
@@ -47,8 +48,12 @@
   justify-content: space-between;
   align-items: flex-end;
   position: relative;
+
 }
 
+.cards > a {
+  text-decoration: none !important;
+}
 
 // Smallest device
 @media (min-width: 100px) and (max-width: 575px) {
