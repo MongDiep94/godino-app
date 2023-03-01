@@ -1,6 +1,6 @@
 <div class="container-card">
   <div class="cards">
-    <% @dinosaurs[0..5].each do |dino| %>
+    <% @dinosaurs.each do |dino| %>
       <div class="card-dino">
         <%= cl_image_tag dino.photo.key, crop: :fill%>
         <div class="card-dino-infos">
