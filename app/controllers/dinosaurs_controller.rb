@@ -1,5 +1,5 @@
 class DinosaursController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show, :new, :create]
 
   def new
     @dinosaur = Dinosaur.new
@@ -8,7 +8,7 @@ class DinosaursController < ApplicationController
 
   def create
     @dinosaur = Dinosaur.new(dinosaurs_params)
-    @dinosaur.user = current_user
+    @dinosaur.user = User.first #pour démo, user par défaut. Il faudra remettre current_user pour confirmer le login
     authorize @dinosaur
     if @dinosaur.save
       redirect_to dinosaur_path(@dinosaur)
@@ -20,6 +20,14 @@ class DinosaursController < ApplicationController
   def index
     @dinosaurs = policy_scope(Dinosaur)
     @dinosaurs = Dinosaur.all
+    @markers = @dinosaurs.geocoded.map do |dinosaur|
+      {
+        lat: dinosaur.latitude,
+        lng: dinosaur.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {dinosaur: dinosaur}),
+        marker_html: render_to_string(partial: "marker", locals: {dinosaur: dinosaur})
+      }
+    end
   end
 
   def show
@@ -27,7 +35,13 @@ class DinosaursController < ApplicationController
     authorize @dinosaur
     @booking = Booking.new
     authorize @booking
-
+    @markers =
+      [{
+        lat: @dinosaur.latitude,
+        lng: @dinosaur.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {dinosaur: @dinosaur}),
+        marker_html: render_to_string(partial: "marker", locals: {dinosaur: @dinosaur})
+      }]
     # @dinosaur = Dinosaur.find(params[:id])
 
   end
@@ -54,7 +68,7 @@ class DinosaursController < ApplicationController
   private
 
   def dinosaurs_params
-    params.require(:dinosaur).permit(:height, :price, :review, :user_id, :weight, :element, :age, :character, :photo)
+    params.require(:dinosaur).permit(:name, :species, :age, :weight, :height, :character, :address, :element, :price, :photo, :review, :user_id)
   end
 
   def booking_reference

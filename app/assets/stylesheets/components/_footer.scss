@@ -12,7 +12,7 @@
   align-items: center;
 }
 .footer-links a {
-  color: $light-green;
+  color: $light-gray;
   opacity: 0.15;
   text-decoration: none;
   font-size: 24px;
@@ -23,4 +23,12 @@
 }
 .footer .fa-heart {
   color: $orange;
+}
+
+.footer-copyright {
+  color: $light-gray;
+}
+
+.page-height {
+  min-height: calc(100vh - 140px);
 }

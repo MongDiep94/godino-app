@@ -16,13 +16,13 @@
   color: white;
   padding: 8px 24px;
   border-radius: 4px;
-  background: $orange;
+  background: $orange !important;
   transition: background 0.3s ease;
 }
 
 .btn-flat:hover {
-  background: $dark-orange;
-  color: white;
+  background: $dark-orange !important;
+  color: white !important;
 }
 
 .btn-gradient {
