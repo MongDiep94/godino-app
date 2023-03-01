@@ -20,6 +20,14 @@ class DinosaursController < ApplicationController
   def index
     @dinosaurs = policy_scope(Dinosaur)
     @dinosaurs = Dinosaur.all
+    @markers = @dinosaurs.geocoded.map do |dinosaur|
+      {
+        lat: dinosaur.latitude,
+        lng: dinosaur.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {dinosaur: dinosaur}),
+        marker_html: render_to_string(partial: "marker", locals: {dinosaur: dinosaur})
+      }
+    end
   end
 
   def show
@@ -27,7 +35,13 @@ class DinosaursController < ApplicationController
     authorize @dinosaur
     @booking = Booking.new
     authorize @booking
-
+    @markers =
+      [{
+        lat: @dinosaur.latitude,
+        lng: @dinosaur.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {dinosaur: @dinosaur}),
+        marker_html: render_to_string(partial: "marker", locals: {dinosaur: @dinosaur})
+      }]
     # @dinosaur = Dinosaur.find(params[:id])
 
   end
