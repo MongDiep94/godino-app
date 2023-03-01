@@ -1,160 +1,76 @@
 
 <div class = "container">
-  <div class ="row">
+  <div class ="row mt-3">
     <div class="col-9">
-      <%= cl_image_tag @dinosaur.photo.key, crop: :fill %>
-      <h1 class="mb-2 mt-2"><%=@dinosaur.name%>, the <%=@dinosaur.species%></h1>
-      <div class = "row justify-content-start mb-2 mt-2">
-        <h6 class = "col-2">⭐ <strong><%= @dinosaur.review%></strong></h6>
-        <h6 class = "col-4"> 20 comments </h6>
+      <%= cl_image_tag @dinosaur.photo.key, crop: :fill, class: :profile_picture %>
+      <div class = "row justify-content-start align-items-center">
+        <h1 class="col-7 mb-3 mt-3"><%=@dinosaur.name%>, the <%=@dinosaur.species.capitalize%></h1>
+        <h3 class="col mb-3 mt-3 justify-content-right">⭐ <%= @dinosaur.review%>/5</h3>
       </div>
-      <p class="mb-1 mt-1">📍 <%= @dinosaur.address %> </p>
-      <ul class="list-group list-group-horizontal mb-3 mt-3">
-        <li class="list-group-item">
-        <% if @dinosaur.element == "air"  %>
-            <span><i class="fa-solid fa-wind"></i> <%= @dinosaur.element.capitalize %></span>
-          <% elsif @dinosaur.element == "earth"%>
-            <span><i class="fa-solid fa-mountain-sun"></i> <%= @dinosaur.element.capitalize %></span>
-          <% else %>
-            <span><i class="fa-solid fa-water"></i> <%= @dinosaur.element.capitalize %></span>
-          <% end %>
-        </li>
-        <li class="list-group-item">
-          <span><i class="fa-solid fa-clock"></i> <%= @dinosaur.age %> M years</span>
-        </li>
-        <li class="list-group-item">
-          <span><i class="fa-solid fa-weight-scale"></i> <%= @dinosaur.weight %> kg</span>
-        </li>
-        <li class="list-group-item">
-          <span><i class="fa-solid fa-ruler-vertical"></i> <%= @dinosaur.height %> meters</span>
-        </li>
-        <li class="list-group-item">
-          <span><i class="fa-solid fa-heart-circle-exclamation"></i> <%= @dinosaur.character.capitalize %></span>
-        </li>
-      </ul>
-      <hr class="rounded mt-3 mb-3">
+        <ul class="list-group list-group-horizontal">
+          <li class="list-group-item">
+          <% if @dinosaur.element == "air"  %>
+              <span><i class="fa-solid fa-wind"></i> <%= @dinosaur.element.capitalize %></span>
+            <% elsif @dinosaur.element == "earth"%>
+              <span><i class="fa-solid fa-mountain-sun"></i> <%= @dinosaur.element.capitalize %></span>
+            <% else %>
+              <span><i class="fa-solid fa-water"></i> <%= @dinosaur.element.capitalize %></span>
+            <% end %>
+          </li>
+          <li class="list-group-item">
+            <span><i class="fa-solid fa-clock"></i> <%= @dinosaur.age %> M years</span>
+          </li>
+          <li class="list-group-item">
+            <span><i class="fa-solid fa-weight-scale"></i> <%= @dinosaur.weight %> kg</span>
+          </li>
+          <li class="list-group-item">
+            <span><i class="fa-solid fa-ruler-vertical"></i> <%= @dinosaur.height %> meters</span>
+          </li>
+          <li class="list-group-item">
+            <span><i class="fa-solid fa-heart-circle-exclamation"></i> <%= @dinosaur.character.capitalize %></span>
+          </li>
+        </ul>
+      <hr class="rounded mt-6 mb-3">
+      <div class="row mb-10">
       <h6> <strong>20 Comments</strong></h6>
+      <img src="" alt="">
+      </div>
     </div>
+
 
     <div style="width: 100%; height: 600px;"
       data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
-      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-
-     <div id="map"></div>
-     <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoianVzdGluZWNhcmxlcyIsImEiOiJjbGR5bDQ5NjEwOGZnM3VzNWZqOTI4bHJyIn0.cPmikPMVw0HbscCZ8nj2hQ';
-      (async () => {
-      const map = new mapboxgl.Map({
-      container: 'map',
-      zoom: 13,
-      center: [2.3798396, 48.8648631],
-      pitch: 80,
-      bearing: 160,
-      interactive: false,
-      // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-      style: 'mapbox://styles/mapbox/satellite-v9'
-      });
-
-      await map.once('style.load');
-
-      // Add daytime fog
-      map.setFog({
-      'range': [-1, 2],
-      'horizon-blend': 0.3,
-      'color': 'white',
-      'high-color': '#add8e6',
-      'space-color': '#d8f2ff',
-      'star-intensity': 0.0
-      });
-
-      // Add 3D terrain
-      map.addSource('mapbox-dem', {
-      'type': 'raster-dem',
-      'url': 'mapbox://mapbox.terrain-rgb',
-      'tileSize': 512,
-      'maxzoom': 14
-      });
-      map.setTerrain({
-      'source': 'mapbox-dem',
-      'exaggeration': 1.5
-      });
-
-      // Run a timing loop to switch between day and night
-      await map.once('idle');
-
-      let lastTime = 0.0;
-      let animationTime = 0.0;
-      let cycleTime = 0.0;
-      let night = true;
-
-      const initialBearing = map.getBearing();
-
-      function frame(time) {
-      const elapsedTime = (time - lastTime) / 1000.0;
-
-      animationTime += elapsedTime;
-      cycleTime += elapsedTime;
-
-      if (cycleTime >= 10.0) {
-      if (night) {
-      // night fog styling
-      map.setFog({
-      'range': [-1, 2],
-      'horizon-blend': 0.3,
-      'color': '#242B4B',
-      'high-color': '#161B36',
-      'space-color': '#0B1026',
-      'star-intensity': 0.8
-      });
-      } else {
-      // day fog styling
-      map.setFog({
-      'range': [-1, 2],
-      'horizon-blend': 0.3,
-      'color': 'white',
-      'high-color': '#add8e6',
-      'space-color': '#d8f2ff',
-      'star-intensity': 0.0
-      });
-      }
-
-      night = !night;
-      cycleTime = 0.0;
-      }
-
-      const rotation = initialBearing + animationTime * 2.0;
-      map.setBearing(rotation % 360);
-
-      lastTime = time;
-
-      window.requestAnimationFrame(frame);
-      }
-
-      window.requestAnimationFrame(frame);
-      })();
-      </script>
-
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+     </div>
   </div>
 </div>
 
-<div class="row g-3 align-items-center">
-  <div class="col-auto">
-    <h2><%= @dinosaur.price %> euros per day </h2>
-    <h2><%= @dinosaur.review %> </h2>
-    <h2><%= @dinosaur.average_rating %>
-
-    <%= simple_form_for [@dinosaur, @booking] do |f| %>
-      <%= f.input :start_date %>
-      <%= f.input :end_date %>
-      <%= f.submit "BOOK", class: "btn btn-dark" %>
-    <% end %>
+    <div class="col-3 p-4" id="bookingform">
+      <div class="mb-6">
+          <div class="row align-items-center">
+              <h2 class="col-4"><%= @dinosaur.price %>€</h2>
+              <h6 class="col-4">per day</h6>
+          </div>
+          <div class="row align-items-center">
+              <h6 class="col-4">⭐ <strong><%= @dinosaur.review %>/5</strong></h6>
+              <h6 class="col-6">20 comments</h6>
+          </div>
+          <hr class="rounded mt-3 mb-3">
+        </div>
+            <%= simple_form_for [@dinosaur, @booking] do |f| %>
+              <%= f.input :start_date %>
+              <%= f.input :end_date %>
+              <div class="d-grid gap-2 pt-3 mb-0">
+              <%= f.submit "BOOK", class: "btn btn-dark" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <% if policy(@dinosaur).edit? %>
+          <%= link_to "Edit your Dinosaur's profile", edit_dinosaur_path(@dinosaur) %> |
+        <% end %>
+        <%= button_to "Destroy this Dinosaur from the platform", @dinosaur, method: :delete if policy(@dinosaur).destroy? %>
+      </div>
   </div>
 </div>
-
-
-<% if policy(@dinosaur).edit? %>
-  <%= link_to "Edit your Dinosaur's profile", edit_dinosaur_path(@dinosaur) %> |
-<% end %>
-
-<%= button_to "Destroy this Dinosaur from the platform", @dinosaur, method: :delete if policy(@dinosaur).destroy? %>
