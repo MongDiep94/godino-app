@@ -22,3 +22,12 @@
 .container-new h2 {
   color: $blue;
 }
+
+.container-info-window {
+  max-width: 200px;
+  padding: 20px;
+  border-radius: 4px;
+  border: 1px solid $light-blue;
+  background-color: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}

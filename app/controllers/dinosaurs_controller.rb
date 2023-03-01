@@ -8,7 +8,7 @@ class DinosaursController < ApplicationController
 
   def create
     @dinosaur = Dinosaur.new(dinosaurs_params)
-    @dinosaur.user = User.first #pour démo, user par défaut. Il faudra remettre current_user pour confirmer le login
+    @dinosaur.user = User.first #pour démo, User par défaut. Il faudra remettre current_user pour confirmer le login
     authorize @dinosaur
     if @dinosaur.save
       redirect_to dinosaur_path(@dinosaur)
