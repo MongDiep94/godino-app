@@ -6,11 +6,11 @@ class DinosaurPolicy < ApplicationPolicy
   end
 
   def show?
-    record.user == user
+    true
   end
 
   def create?
-    record.user == user
+    true
   end
 
   def update?
@@ -20,5 +20,4 @@ class DinosaurPolicy < ApplicationPolicy
   def destroy?
     record.user == user
   end
-
 end

@@ -1,15 +1,17 @@
 class DinosaursController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
+
   def new
-    authorize @dinosaur
     @dinosaur = Dinosaur.new
+    authorize @dinosaur
   end
 
   def create
-    authorize @dinosaur
     @dinosaur = Dinosaur.new(dinosaurs_params)
     @dinosaur.user = current_user
+    authorize @dinosaur
     if @dinosaur.save
-      redirect_to dinausaur_path(@dinosaur)
+      redirect_to dinosaur_path(@dinosaur)
     else
       render :new, status: :unprocessable_entity
     end
@@ -21,8 +23,13 @@ class DinosaursController < ApplicationController
   end
 
   def show
-    authorize @dinosaur
     @dinosaur = Dinosaur.find(params[:id])
+    authorize @dinosaur
+    @booking = Booking.new
+    authorize @booking
+
+    # @dinosaur = Dinosaur.find(params[:id])
+
   end
 
   def edit
@@ -47,7 +54,7 @@ class DinosaursController < ApplicationController
   private
 
   def dinosaurs_params
-    params.require(:dinosaur).permit(:height, :price, :review, :availability_start, :availability_end, :user_id, :weight, :element, :age, :character, :photo)
+    params.require(:dinosaur).permit(:height, :price, :review, :user_id, :weight, :element, :age, :character, :photo)
   end
 
   def booking_reference
