@@ -1,4 +1,6 @@
 class DinosaursController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
+
   def new
     @dinosaur = Dinosaur.new
     authorize @dinosaur
@@ -23,6 +25,11 @@ class DinosaursController < ApplicationController
   def show
     @dinosaur = Dinosaur.find(params[:id])
     authorize @dinosaur
+    @booking = Booking.new
+    authorize @booking
+
+    # @dinosaur = Dinosaur.find(params[:id])
+
   end
 
   def edit
