@@ -36,6 +36,11 @@
       <h6> <strong>20 Comments</strong></h6>
     </div>
 
+    <div style="width: 100%; height: 600px;"
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+
      <div id="map"></div>
      <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoianVzdGluZWNhcmxlcyIsImEiOiJjbGR5bDQ5NjEwOGZnM3VzNWZqOTI4bHJyIn0.cPmikPMVw0HbscCZ8nj2hQ';
