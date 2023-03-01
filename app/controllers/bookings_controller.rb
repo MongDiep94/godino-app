@@ -23,7 +23,7 @@ class BookingsController < ApplicationController
   def create
     authorize @booking
     @booking = Booking.new(bookings_params)
-    @booking.user = current_user
+    @booking.user = User.first #pour démo, User par défaut. Il faudra remettre current_user pour confirmer le login
     if @booking.save
       redirect_to booking_path(@booking)
     else
