@@ -13,7 +13,11 @@ class BookingsController < ApplicationController
 
   def show
     authorize @booking
-    @booking = Booking.find(params[:id])
+    @dinosaur = Dinosaur.find(params[:id])
+    @booking = Booking.new
+
+
+    # @booking = Booking.find(params[:id])
   end
 
   def create
