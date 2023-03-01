@@ -1,5 +1,19 @@
-<%= simple_form_for(dinosaur) do |f| %>
-  <!-- [...] -->
-  <%= f.input :photo, as: :file %>
-  <!-- [...] -->
-<% end %>
+<div class="container-new d-grid gap-2">
+  <h2 class="mb-2">Create your Dino's profile <i class="fa-solid fa-paw"></i></h2>
+  <hr />
+  <%= simple_form_for(@dinosaur) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :species %>
+    <%= f.input :age, placeholder: 'M years old' %>
+    <%= f.input :weight, placeholder: 'tonne' %>
+    <%= f.input :height, placeholder: 'km' %>
+    <%= f.input :character%>
+    <%= f.input :address%>
+    <%= f.input :element, collection: ["earth", "water", "wind", "fire"] %>
+    <%= f.input :price, placeholder: '€'%>
+    <%= f.input :photo, as: :file %>
+    <div class="d-grid mt-3 btn btn-flat">
+    <%= f.button :submit %>
+    </div>
+  <% end %>
+</div>

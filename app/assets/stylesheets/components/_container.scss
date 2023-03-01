@@ -8,3 +8,17 @@
   margin: 0 auto;
   padding: 40px 0px;
 }
+
+.container-new {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px 50px;
+  border-radius: 10px;
+  border: 1px solid $light-gray;
+  background-color: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.container-new h2 {
+  color: $blue;
+}
