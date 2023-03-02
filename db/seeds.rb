@@ -10,7 +10,7 @@ puts "old data destroyed"
 puts 'start seeding users'
 # Seeds Users
 @nicolas = User.create(first_name: "Nicolas", last_name: "Brien", email: "dmslkdlk@mgmail.com", password: "123456", password_confirmation: "123456")
-@mong = User.new(first_name: "Mong", last_name: "Diep",email: "dmslsdkdlk@mgmail.com", password: "123456", password_confirmation: "123456")
+@mong = User.new(first_name: "Mong", last_name: "Diep", email: "dmslsdkdlk@mgmail.com", password: "123456", password_confirmation: "123456")
 @mong.save
 @malo = User.new(first_name: "Malo", last_name: "Bobrowska", email: "dmlkdlk@mgmail.com", password: "123456", password_confirmation: "123456")
 @malo.save
@@ -110,6 +110,28 @@ character: "shy", address: "1 Pl. d'Italie, 75013 Paris")
 @iguanodon.save
 puts 'dino 10 done'
 
+# Seeds Bookings
+puts 'start seeding bookings'
+@booking1 = Booking.create(user_id: User.all.sample.id, dinosaur_id: Dinosaur.all.sample.id, status: "Pending", rating: "5", start_date: "03/02/2023", end_date: "04/07/2032")
+@booking2 = Booking.new(user_id: User.all.sample.id, dinosaur_id: Dinosaur.all.sample.id, status: "Pending", rating: "5", start_date: "03/02/2023", end_date: "04/07/2032")
+@booking2.save
+@booking3 = Booking.new(user_id: User.all.sample.id, dinosaur_id: Dinosaur.all.sample.id, status: "Denied", rating: "3", start_date: "07/03/2023", end_date: "01/04/2024")
+@booking3.save
+@booking4 = Booking.new(user_id: User.all.sample.id, dinosaur_id: Dinosaur.all.sample.id, status: "Accepted", rating: "2", start_date: "01/12/2022", end_date: "01/15/2022")
+@booking4.save
+@booking5 = Booking.new(user_id: User.all.sample.id, dinosaur_id: Dinosaur.all.sample.id, status: "Accepted", rating: "1", start_date: "02/03/2022", end_date: "02/14/2022")
+@booking5.save
+@booking6 = Booking.new(user_id: User.all.sample.id, dinosaur_id: Dinosaur.all.sample.id, status: "Pending", rating: "5", start_date: "05/28/2023", end_date: "05/30/2023")
+@booking6.save
+@booking7 = Booking.new(user_id: User.all.sample.id, dinosaur_id: Dinosaur.all.sample.id, status: "Pending", rating: "5", start_date: "01/23/2023", end_date: "01/25/2023")
+@booking7.save
+@booking8 = Booking.new(user_id: User.all.sample.id, dinosaur_id: Dinosaur.all.sample.id, status: "Accepted", rating: "5", start_date: "03/15/2023", end_date: "04/01/2023")
+@booking8.save
+@booking9 = Booking.new(user_id: User.all.sample.id, dinosaur_id: Dinosaur.all.sample.id, status: "Pending", rating: "4", start_date: "04/02/2023", end_date: "04/04/2023")
+@booking9.save
+@booking10 = Booking.new(user_id: User.all.sample.id, dinosaur_id: Dinosaur.all.sample.id, status: "Pending", rating: "4", start_date: "05/05/2023", end_date: "05/21/2023")
+@booking10.save
 
+puts 'seeding bookings done'
 
 puts 'ALL GOOD'
