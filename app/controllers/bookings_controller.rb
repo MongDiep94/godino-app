@@ -33,15 +33,15 @@ class BookingsController < ApplicationController
   def accept
     authorize @booking
     @booking = Booking.find(params[:id])
-    @booking.update(bookings_params)
-    redirect_to booking_path(@booking)
+    @booking.update(status: 'Accepted')
+    redirect_to dashboard_path
   end
 
   def deny
     authorize @booking
     @booking = Booking.find(params[:id])
-    @booking.update(bookings_params)
-    redirect_to booking_path(@booking)
+    @booking.update(status: 'Denied')
+    redirect_to dashboard_path
   end
 
   private
