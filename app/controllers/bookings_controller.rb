@@ -1,31 +1,30 @@
 class BookingsController < ApplicationController
 
-  def new
-    authorize @booking
-    @dinosaur = Dinosaur.find(params[:dinosaur_id])
-    @booking = Booking.new
-  end
 
   def index
     @bookings = policy_scope(Booking)
     @bookings = Booking.all
   end
 
-  def show
-    authorize @booking
-    @dinosaur = Dinosaur.find(params[:id])
-    @booking = Booking.new
+  # def show
+  #   @dinosaur = Dinosaur.find(params[:id])
+  #   @booking = Booking.new
+  #   authorize @booking
 
-
-    # @booking = Booking.find(params[:id])
-  end
+  #   # @booking = Booking.find(params[:id])
+  # end
 
   def create
-    authorize @booking
     @booking = Booking.new(bookings_params)
-    @booking.user = User.first #pour démo, User par défaut. Il faudra remettre current_user pour confirmer le login
+    @dinosaur = Dinosaur.find(params[:dinosaur_id])
+    authorize @booking
+    authorize @dinosaur
+
+    @booking.user = current_user #pour démo, User par défaut. Il faudra remettre current_user pour confirmer le login
+    @booking.dinosaur = @dinosaur
+    @booking.status = "Pending"
     if @booking.save
-      redirect_to booking_path(@booking)
+      redirect_to dashboard_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -48,7 +47,7 @@ class BookingsController < ApplicationController
   private
 
   def bookings_params
-    params.require(:booking).permit(:status, :user_id, :dinosaur_id)
+    params.require(:booking).permit(:start_date, :end_date)
   end
 
 end

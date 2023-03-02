@@ -36,8 +36,8 @@ class DinosaursController < ApplicationController
 
   def show
     @dinosaur = Dinosaur.find(params[:id])
-    authorize @dinosaur
     @booking = Booking.new
+    authorize @dinosaur
     authorize @booking
     @markers =
       [{
@@ -46,8 +46,6 @@ class DinosaursController < ApplicationController
         info_window_html: render_to_string(partial: "info_window", locals: {dinosaur: @dinosaur}),
         marker_html: render_to_string(partial: "marker", locals: {dinosaur: @dinosaur})
       }]
-    # @dinosaur = Dinosaur.find(params[:id])
-
   end
 
   def edit
