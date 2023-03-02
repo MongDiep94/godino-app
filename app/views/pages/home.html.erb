@@ -4,10 +4,10 @@
     <p>Change your life style and feel the extraordinary.</p>
 
 
-    <%= simple_form_for :search, url: root_path, method: :get do |f| %>
+    <%= simple_form_for :search, url: dinosaurs_path, method: :get do |f| %>
       <div class="search-form-control form-group", style="margin-bottom: 20px" >
         <input class="form-control string required" type="text" name="search[query]" id="search_query" placeholder="Search for a Dino nearby"/>
-        <button name="button" type="submit" class="btn btn-flat">
+        <button name="button" type="submit" class="btn btn-flat" link_to >
           <i class="fas fa-search"></i> Search
         </button>
       </div>

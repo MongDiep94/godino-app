@@ -19,7 +19,11 @@ class DinosaursController < ApplicationController
 
   def index
     @dinosaurs = policy_scope(Dinosaur)
-    @dinosaurs = Dinosaur.all
+    if params[:search][:query].present?
+      @dinosaurs = Dinosaur.search_by_name_species_and_character(params[:search][:query])
+    else
+      @dinosaurs = Dinosaur.all
+    end
     @markers = @dinosaurs.geocoded.map do |dinosaur|
       {
         lat: dinosaur.latitude,
