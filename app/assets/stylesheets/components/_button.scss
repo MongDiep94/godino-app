@@ -19,10 +19,28 @@
   transition: background 0.3s ease;
   text-decoration: none;
   margin: 20px;
+  font-weight: bold;
   text-align: center;
 }
 
 .btn-new:hover {
+  background: linear-gradient($orange, $dark-orange);
+  color: white;
+}
+
+.btn-more {
+  color: white;
+  padding: 8px 24px;
+  border-radius: 4px;
+  background: $orange;
+  transition: background 0.3s ease;
+  text-decoration: none;
+  margin: auto;
+  font-weight: bold;
+  text-align: center;
+}
+
+.btn-more:hover {
   background: $dark-orange;
   color: white;
 }

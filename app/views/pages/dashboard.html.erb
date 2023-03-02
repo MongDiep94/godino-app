@@ -1,16 +1,35 @@
 <div class = "container">
-  <div class ="row mt-3 mb-3">
-    <div class="col-6">
+  <div class ="row mt-5">
+    <div class="col-auto">
       <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-large" %>
-
-      <h1><%= current_user.first_name %> <%= current_user.last_name %></h1>
-      <p><%= current_user.email %></p>
-      </div>
-
-      <% current_user.dinosaurs each do |dinosaur| %>
-      <% end %>
     </div>
+    <div class="col">
+      <h4><%= current_user.first_name %> <%= current_user.last_name %></h4>
+      <p><%= current_user.email %></p>
+    </div>
+    <hr class="rounded mt-3 mb-3">
   </div>
 
-
+<div class ="row mt-2 justify-content-between">
+  <div class = "col-5">
+    <h5 class="mt-2">My dinosaurs (<%= current_user.dinosaurs.count%>)</h5>
+    <% current_user.dinosaurs.each do |dinosaur| %>
+      <div class ="row mt-3">
+        <div class="col-auto">
+          <%= cl_image_tag dinosaur.photo.key, crop: :fill, class: :dashboard_picture %>
+        </div>
+        <div class ="col">
+          <h5><%=dinosaur.name%>, the <%=dinosaur.species.capitalize%> ⭐ <%= dinosaur.review%>/5</h5>
+          <h6>Pending bookings <span class="badge bg-secondary">New</span></h6>
+            <% dinosaur.bookings.each do |booking|%>
+              <%= booking.status %>
+              <%end%>
+        </div>
+      </div>
+    <%end%>
   </div>
+  <div class = "col-5">
+    <h5 class="mt-2">Upcoming bookings</h5>
+    
+  </div>
+</div>

@@ -10,3 +10,18 @@
 .navbar-lewagon .navbar-brand img {
   width: 200px;
 }
+
+.nav-link-adopt {
+  color: white;
+  border-radius: 8px;
+  background: $orange !important;
+  transition: background 0.3s ease;
+  text-decoration: none;
+  padding: 10px;
+  margin: 10px;
+}
+
+.nav-link-adopt:hover {
+  background: $dark-orange;
+  color: white;
+}
