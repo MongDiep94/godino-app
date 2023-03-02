@@ -4,11 +4,12 @@ class Dinosaur < ApplicationRecord
   has_one_attached :photo
 
   include PgSearch::Model
-  pg_search_scope :search_by_name_species_and_character,
+  pg_search_scope :search_by_address_name_species_and_character,
     against: {
-      name: 'A',
-      species: 'B',
-      character: 'C'
+      address: 'A',
+      name: 'B',
+      species: 'C',
+      character: 'D'
     },
     using: {
       tsearch: { prefix: true }
@@ -24,5 +25,4 @@ class Dinosaur < ApplicationRecord
     return 4
     # self.bookings.pluck(:rating) / self.bookings.length
   end
-
 end

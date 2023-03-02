@@ -19,8 +19,8 @@ class DinosaursController < ApplicationController
 
   def index
     @dinosaurs = policy_scope(Dinosaur)
-    if params[:search][:query].present?
-      @dinosaurs = Dinosaur.search_by_name_species_and_character(params[:search][:query])
+    if params[:search].present?
+      @dinosaurs = Dinosaur.search_by_address_name_species_and_character(params[:search][:query])
     else
       @dinosaurs = Dinosaur.all
     end
