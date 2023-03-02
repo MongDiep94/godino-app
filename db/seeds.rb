@@ -14,7 +14,7 @@ puts 'start seeding users'
 @mong.save
 @malo = User.new(first_name: "Malo", last_name: "Bobrowska", email: "dmlkdlk@mgmail.com", password: "123456", password_confirmation: "123456")
 @malo.save
-@justine = User.new(first_name: "Justine", last_name: "Carles", email: "dmsllk@mgmail.com", password: "123456", password_confirmation: "123456")
+@justine = User.new(first_name: "Justine", last_name: "Carles",email: "justine@test.com", password: "coucou", password_confirmation: "coucou")
 @justine.save
 puts 'seeding users done'
 
