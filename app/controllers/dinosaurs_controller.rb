@@ -8,7 +8,7 @@ class DinosaursController < ApplicationController
 
   def create
     @dinosaur = Dinosaur.new(dinosaurs_params)
-    @dinosaur.user = User.first #pour démo, user par défaut. Il faudra remettre current_user pour confirmer le login
+    @dinosaur.user = User.first #pour démo, User par défaut. Il faudra remettre current_user pour confirmer le login
     authorize @dinosaur
     if @dinosaur.save
       redirect_to dinosaur_path(@dinosaur)
@@ -19,7 +19,11 @@ class DinosaursController < ApplicationController
 
   def index
     @dinosaurs = policy_scope(Dinosaur)
-    @dinosaurs = Dinosaur.all
+    if params[:search].present?
+      @dinosaurs = Dinosaur.search_by_address_name_species_and_character(params[:search][:query])
+    else
+      @dinosaurs = Dinosaur.all
+    end
     @markers = @dinosaurs.geocoded.map do |dinosaur|
       {
         lat: dinosaur.latitude,

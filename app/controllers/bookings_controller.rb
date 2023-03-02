@@ -23,7 +23,8 @@ class BookingsController < ApplicationController
   def create
     authorize @booking
     @booking = Booking.new(bookings_params)
-    @booking.user = current_user
+    @booking.status = "Pending"
+    @booking.user = User.first #pour démo, User par défaut. Il faudra remettre current_user pour confirmer le login
     if @booking.save
       redirect_to booking_path(@booking)
     else
@@ -34,15 +35,15 @@ class BookingsController < ApplicationController
   def accept
     authorize @booking
     @booking = Booking.find(params[:id])
-    @booking.update(bookings_params)
-    redirect_to booking_path(@booking)
+    @booking.update(status: 'Accepted')
+    redirect_to dashboard_path
   end
 
   def deny
     authorize @booking
     @booking = Booking.find(params[:id])
-    @booking.update(bookings_params)
-    redirect_to booking_path(@booking)
+    @booking.update(status: 'Denied')
+    redirect_to dashboard_path
   end
 
   private

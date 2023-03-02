@@ -1,0 +1,16 @@
+<div class = "container">
+  <div class ="row mt-3 mb-3">
+    <div class="col-6">
+      <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-large" %>
+
+      <h1><%= current_user.first_name %> <%= current_user.last_name %></h1>
+      <p><%= current_user.email %></p>
+      </div>
+
+      <% current_user.dinosaurs each do |dinosaur| %>
+      <% end %>
+    </div>
+  </div>
+
+
+  </div>
