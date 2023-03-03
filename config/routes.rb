@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   get "dashboard", to: 'pages#dashboard'
-  patch 'bookings/:id/accept', to: 'bookings#accept'
-  patch 'bookings/:id/deny', to: 'bookings#deny'
+  patch 'bookings/:id/accept', to: 'bookings#accept', as: :acceptbooking
+  patch 'bookings/:id/deny', to: 'bookings#deny', as: :denybooking
 end
