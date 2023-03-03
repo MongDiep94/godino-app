@@ -54,6 +54,52 @@ a {
   position: relative;
 }
 
+.card-dino-index {
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 4px;
+}
+
+.card-dino-index > img {
+  height: 200px;
+  width: 300px;
+  object-fit: cover;
+}
+
+.card-dino h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+  color: $blue;
+}
+
+.card-dino-index ul {
+  font-size: 12px;
+  opacity: .7;
+  margin: 0;
+  color: $gray;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+#card-dino-pricing-index {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+  color: $orange;
+  display: flex;
+  align-items:flex-start;
+}
+
+.card-dino-index .card-dino-infos-index {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+}
+
 .cards > a {
   text-decoration: none !important;
 }
