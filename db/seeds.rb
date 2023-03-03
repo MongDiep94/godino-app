@@ -9,7 +9,7 @@ puts "old data destroyed"
 
 puts 'start seeding users'
 # Seeds Users
-@nicolas = User.create(first_name: "Nicolas", last_name: "Brien", email: "dmslkdlk@mgmail.com", password: "123456", password_confirmation: "123456")
+@nicolas = User.create(first_name: "Steven", last_name: "Spielberg", email: "spielberg@spielberg.com", password: "123456", password_confirmation: "123456")
 @mong = User.new(first_name: "Mong", last_name: "Diep", email: "dmslsdkdlk@mgmail.com", password: "123456", password_confirmation: "123456")
 @mong.save
 @malo = User.new(first_name: "Malo", last_name: "Bobrowska", email: "dmlkdlk@mgmail.com", password: "123456", password_confirmation: "123456")
