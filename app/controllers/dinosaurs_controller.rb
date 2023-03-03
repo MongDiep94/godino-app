@@ -37,6 +37,7 @@ class DinosaursController < ApplicationController
   def show
     @dinosaur = Dinosaur.find(params[:id])
     @booking = Booking.new
+    @review = Review.new
     authorize @dinosaur
     authorize @booking
     @markers =

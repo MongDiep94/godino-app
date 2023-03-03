@@ -1,29 +1,29 @@
-<div class="container-card">
-  <div class="cards">
-    <% @dinosaurs.each do |dino| %>
-    <%= link_to dinosaur_path(dino) do %>
-      <div class="card-dino">
-      <% if dino.photo.attached? %>
-        <%= cl_image_tag dino.photo.key, crop: :fill%>
-        <% end %>
-        <div class="card-dino-infos">
-          <div>
-            <h2><%= dino.name%></h2>
-              <ul>
-                <li><strong>Species : </strong><%= dino.species%></li>
-                <li><strong>Character : </strong><%= dino.character%></li>
+<div class="container-card row">
+  <% @dinosaurs.each do |dino| %>
+    <div class="cards col-4">
+      <%= link_to dinosaur_path(dino) do %>
+        <div class="card-dino">
+          <% if dino.photo.attached? %>
+            <%= cl_image_tag dino.photo.key, crop: :fill%>
+          <% end %>
+          <div class="card-dino-infos">
+            <div>
+              <h2><%= dino.name%></h2>
+                <ul>
+                  <li><strong>Species : </strong><%= dino.species%></li>
+                  <li><strong>Character : </strong><%= dino.character%></li>
+                </ul>
+            </div>
+            <div>
+            <h2 id="card-dino-pricing">€<%= dino.price%>/day</h2>
+              <ul class="list-inline">
+                <li class="list-inline-item"><i class="fa-regular fa-heart"></i></li>
+                <li class="list-inline-item"><i class="fa-solid fa-star"></i><%= dino.review%></li>
               </ul>
-          </div>
-          <div>
-          <h2 id="card-dino-pricing">€<%= dino.price%>/day</h2>
-            <ul class="list-inline">
-              <li class="list-inline-item"><i class="fa-regular fa-heart"></i></li>
-              <li class="list-inline-item"><i class="fa-solid fa-star"></i><%= dino.review%></li>
-            </ul>
+            </div>
           </div>
         </div>
-      </div>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>

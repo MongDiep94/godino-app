@@ -1,3 +1,17 @@
+#btn-scrollUp {
+  position: fixed;
+  bottom : 70px;
+  right: 40px;
+  opacity: 0.5;
+  color :$blue;
+  height: 30px;
+  }
+
+  #btn-scrollUp i {
+    color :$blue;
+    height: 80px;
+    }
+
 .btn-flat {
   color: white;
   padding: 8px 24px;
@@ -18,7 +32,7 @@
   background: $orange;
   transition: background 0.3s ease;
   text-decoration: none;
-  margin: 20px;
+  margin: 20px 0px;
   font-weight: bold;
   text-align: center;
 }
@@ -35,12 +49,29 @@
   background: $orange;
   transition: background 0.3s ease;
   text-decoration: none;
-  margin: auto;
+  margin: 10px;
   font-weight: bold;
   text-align: center;
 }
 
 .btn-more:hover {
   background: $dark-orange;
+  color: white;
+}
+
+.btn-navbar {
+  color: white;
+  padding: 8px 24px;
+  border-radius: 4px;
+  background: $orange;
+  transition: background 0.3s ease;
+  text-decoration: none;
+  margin: 0px 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.btn-navbar:hover {
+  background: linear-gradient($orange, $dark-orange);
   color: white;
 }
