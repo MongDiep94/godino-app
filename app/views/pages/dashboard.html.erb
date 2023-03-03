@@ -84,7 +84,7 @@
               <%= cl_image_tag dinosaur.photo.key, crop: :fill, class: :dashboard_picture %>
             </div>
             <div class ="col-auto">
-              <h4><%=dinosaur.name%>, the <%=dinosaur.species.capitalize%> ⭐ <%= dinosaur.review%>/5</h4>
+              <h4><%=dinosaur.name%>, the <%=dinosaur.species.capitalize%> ⭐ <%= dinosaur.rating%>/5</h4>
               <ul class="list-group list-group-horizontal my-3">
                 <li class="list-group-item">
                   <% if dinosaur.element == "air" %>
@@ -129,7 +129,7 @@
               <%= cl_image_tag booking.dinosaur.photo.key, crop: :fill, class: :dashboard_picture %>
             </div>
             <div class ="col-auto">
-              <h4 class="my-2"><%= booking.dinosaur.name %>, the <%=booking.dinosaur.species.capitalize%> ⭐ <%= booking.dinosaur.review%>/5</h4>
+              <h4 class="my-2"><%= booking.dinosaur.name %>, the <%=booking.dinosaur.species.capitalize%> ⭐ <%= booking.dinosaur.rating%>/5</h4>
               <div>
                 <% if booking.status == "Pending"%>
                   <div class="alert alert-warning p-2 w-25" role="alert">
