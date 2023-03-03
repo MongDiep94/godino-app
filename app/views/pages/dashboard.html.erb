@@ -7,88 +7,149 @@
       <h4><%= current_user.first_name %> <%= current_user.last_name %></h4>
       <p><%= current_user.email %></p>
     </div>
-    <hr class="rounded mt-3 mb-3">
+    <hr class="rounded my-5">
   </div>
 
-  <nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">My dinosaurs (<%= current_user.dinosaurs.count%>)</button>
-    <button class="nav-link" id="nav-bookings-tab" data-bs-toggle="tab" data-bs-target="#nav-bookings" type="button" role="tab" aria-controls="nav-bookings" aria-selected="false">Booking requests</button>
-    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
-  </div>
+<nav>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Booking requests</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
+        My Dinosaurs
+        <span class="badge text-bg-secondary"><%= current_user.dinosaurs.count %></span>
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">
+      My bookings
+      <span class="badge text-bg-secondary"><%= current_user.bookings.count %></span>
+      </button>
+    </li>
+  </ul>
 </nav>
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-  <div class ="row mt-3 justify-content-between">
-    <div class = "container">
-      <% current_user.dinosaurs.each do |dinosaur| %>
-        <div class ="row">
-          <div class="col-auto">
-            <%= cl_image_tag dinosaur.photo.key, crop: :fill, class: :dashboard_picture %>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="profile" role="tabpanel" aria-labelledby="profile-tab" tabindex="1">
+      <div class="container my-3">
+        <h6 class="mb-3"><strong>Pending Bookings</strong> <span class="badge bg-secondary">New</span></h6>
+        <% current_user.dinosaurs.each do |dinosaur| %>
+          <div class = "row ms-1">
+            <% dinosaur.bookings.each do |booking|%>
+              <% if booking.status == "Pending"%>
+                <div class="alert alert-secondary" role="alert">
+                  <p> Booking request from <%= booking.start_date%> to <%= booking.end_date %> for <strong><%= dinosaur.name%> the <%= dinosaur.species %></strong></p>
+                  <%= link_to "Accept", acceptbooking_path(booking), class: "btn btn-danger", data: {turbo_method: :patch} %>
+                  <%= link_to "Deny", denybooking_path(booking), class: "btn btn-success", data: {turbo_method: :patch} %>
+                </div>
+              <%end%>
+            <%end%>
           </div>
-          <div class ="col-auto">
-            <h4><%=dinosaur.name%>, the <%=dinosaur.species.capitalize%> ⭐ <%= dinosaur.review%>/5</h4>
-            <ul class="list-group list-group-horizontal my-3">
-              <li class="list-group-item">
-              <% if dinosaur.element == "air"  %>
-                  <span><i class="fa-solid fa-wind"></i> <%= dinosaur.element.capitalize %></span>
-                <% elsif dinosaur.element == "earth"%>
-                  <span><i class="fa-solid fa-mountain-sun"></i> <%= dinosaur.element.capitalize %></span>
-                <% else %>
-                  <span><i class="fa-solid fa-water"></i> <%= dinosaur.element.capitalize %></span>
-                <% end %>
-              </li>
-              <li class="list-group-item">
-                <span><i class="fa-solid fa-clock"></i> <%= dinosaur.age %> M years</span>
-              </li>
-              <li class="list-group-item">
-                <span><i class="fa-solid fa-weight-scale"></i> <%= dinosaur.weight %> kg</span>
-              </li>
-              <li class="list-group-item">
-                <span><i class="fa-solid fa-ruler-vertical"></i> <%= dinosaur.height %> meters</span>
-              </li>
-              <li class="list-group-item">
-                <span><i class="fa-solid fa-heart-circle-exclamation"></i> <%= dinosaur.character.capitalize %></span>
-              </li>
-            </ul>
-            <div class="btn-group mt-2" role="group" aria-label="Basic example">
-            <%= link_to "Profile", dinosaur_path(dinosaur), type:"button", class:"btn btn-flat"%>
-            <%= link_to "Edit", edit_dinosaur_path(dinosaur), type:"button", class:"btn btn-flat"%>
-            <%=link_to "Delete", dinosaur_path(dinosaur), method: :delete, data: {confirm: 'Are you certain you want to delete this dinosaur?'}, type:"button", class:"btn btn-flat"%>
+        <%end%>
+        <hr class="rounded my-3">
+        <h6 class="mb-3"><strong>Accepted Bookings</strong></h6>
+        <% current_user.dinosaurs.each do |dinosaur| %>
+          <div class = "row ms-1">
+            <% dinosaur.bookings.each do |booking|%>
+              <% if booking.status == "Accepted"%>
+                <div class="alert alert-secondary" role="alert">
+                  <p> Booking request from <%= booking.start_date%> to <%= booking.end_date %> for <strong><%= dinosaur.name%> the <%= dinosaur.species %></strong></p>
+                </div>
+              <%end%>
+            <%end%>
+          </div>
+        <%end%>
+        <hr class="rounded my-3">
+        <h6 class="mb-3"><strong>Denied Bookings</strong></h6>
+        <% current_user.dinosaurs.each do |dinosaur| %>
+          <div class = "row ms-1">
+            <% dinosaur.bookings.each do |booking|%>
+              <% if booking.status == "Denied"%>
+                <div class="alert alert-secondary" role="alert">
+                  <p> Booking request from <%= booking.start_date%> to <%= booking.end_date %> for <strong><%= dinosaur.name%> the <%= dinosaur.species %></strong></p>
+                </div>
+              <%end%>
+            <%end%>
+          </div>
+        <%end%>
+      </div>
+  </div>
+  <div class="tab-pane" id="home" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+    <div class ="row mt-3 justify-content-between">
+      <div class = "container">
+        <% current_user.dinosaurs.each do |dinosaur| %>
+          <div class ="row">
+            <div class="col-auto">
+              <%= cl_image_tag dinosaur.photo.key, crop: :fill, class: :dashboard_picture %>
             </div>
+            <div class ="col-auto">
+              <h4><%=dinosaur.name%>, the <%=dinosaur.species.capitalize%> ⭐ <%= dinosaur.review%>/5</h4>
+              <ul class="list-group list-group-horizontal my-3">
+                <li class="list-group-item">
+                  <% if dinosaur.element == "air" %>
+                    <span><i class="fa-solid fa-wind"></i> <%= dinosaur.element.capitalize %></span>
+                  <% elsif dinosaur.element == "earth"%>
+                    <span><i class="fa-solid fa-mountain-sun"></i> <%= dinosaur.element.capitalize %></span>
+                  <% else %>
+                    <span><i class="fa-solid fa-water"></i> <%= dinosaur.element.capitalize %></span>
+                  <% end %>
+                </li>
+                <li class="list-group-item">
+                  <span><i class="fa-solid fa-clock"></i> <%= dinosaur.age %> M years</span>
+                </li>
+                <li class="list-group-item">
+                  <span><i class="fa-solid fa-weight-scale"></i> <%= dinosaur.weight %> kg</span>
+                </li>
+                <li class="list-group-item">
+                  <span><i class="fa-solid fa-ruler-vertical"></i> <%= dinosaur.height %> meters</span>
+                </li>
+                <li class="list-group-item">
+                  <span><i class="fa-solid fa-heart-circle-exclamation"></i> <%= dinosaur.character.capitalize %></span>
+                </li>
+              </ul>
+              <div class="btn-group mt-2" role="group" aria-label="Basic example">
+                <%= link_to "Profile", dinosaur_path(dinosaur), type:"button", class:"btn btn-flat"%>
+                <%= link_to "Edit", edit_dinosaur_path(dinosaur), type:"button", class:"btn btn-flat"%>
+                <%=link_to "Delete", dinosaur_path(dinosaur), data: {turbo_method: :delete, turbo_confirm: 'Are you certain you want to delete this dinosaur?'}, type:"button", class:"btn btn-flat"%>
+              </div>
+            </div>
+            <hr class="text-divider my-4">
           </div>
-          <hr class="text-divider my-3">
-        </div>
-      <%end%>
+        <%end%>
+      </div>
     </div>
   </div>
-  <div class="tab-pane fade" id="nav-bookings" role="tabpanel" aria-labelledby="nav-bookings-tab" tabindex="0">
-    <h1>blabla</h1>
-      <h6> <strong>Pending bookings</strong> <span class="badge bg-secondary">New</span></h6>
-      <% current_user.dinosaurs.each do |dinosaur| %>
-        <% dinosaur.bookings.each do |booking|%>
-        bla
-          <p> Booking request from <%= booking.start_date%> to <%= booking.end_date %></p>
-        <%end%>
-    <%end%>
-  </div>
-  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">...</div>
-  <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div>
-</div>
-  </div>
-
-<h6> <strong>Pending Bookings</strong> <span class="badge bg-secondary">New</span></h6>
-      <% current_user.dinosaurs.each do |dinosaur| %>
-        <% dinosaur.bookings.each do |booking|%>
-        <% if (booking.status == "pending") %>
-        <div class="alert alert-secondary" role="alert">
-          <p> Booking request from <%= booking.start_date%> to <%= booking.end_date %> for <strong><%= dinosaur.name%> the <%= dinosaur.species %></strong> [<%=booking.status%>]</p>
-            <%= link_to "Accept", acceptbooking_path(booking), class: "btn btn-danger" %>
-          <%= link_to "Deny", denybooking_path(booking), class: "btn btn-success" %>
+  <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab" tabindex="0">
+    <div class="container my-3">
+          <h6 class="mb-3"><strong>My Bookings</strong></h6>
+          <% current_user.bookings.each do |booking| %>
+          <div class ="row mt-3">
+            <div class="col-auto">
+              <%= cl_image_tag booking.dinosaur.photo.key, crop: :fill, class: :dashboard_picture %>
+            </div>
+            <div class ="col-auto">
+              <h4 class="my-2"><%= booking.dinosaur.name %>, the <%=booking.dinosaur.species.capitalize%> ⭐ <%= booking.dinosaur.review%>/5</h4>
+              <div>
+                <% if booking.status == "Pending"%>
+                  <div class="alert alert-warning p-2 w-25" role="alert">
+                    <%= booking.status %>
+                  </div>
+                <% elsif booking.status == "Accepted"%>
+                  <div class="alert alert-success p-2 w-25" role="alert">
+                    <%= booking.status %>
+                  </div>
+                <%else%>
+                  <div class="alert alert-danger p-2 w-25" role="alert">
+                    <%= booking.status %>
+                  </div>
+                <%end%>
+              </div>
+              <p class="my-4"><strong>From </strong><%= booking.start_date %> <strong> to </strong><%= booking.end_date %> </p>
+            </div>
           </div>
-        <%end%>
-        <%end%>
-    <%end%>
-
-
+          <hr class="text-divider my-2">
+          <%end%>
+    </div>
+  </div>
 </div>

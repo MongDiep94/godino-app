@@ -54,17 +54,17 @@ class DinosaursController < ApplicationController
   end
 
   def update
-    authorize @dinosaur
     @dinosaur = Dinosaur.find(params[:id])
+    authorize @dinosaur
     @dinosaur.update(dinosaurs_params)
     redirect_to dinosaur_path(@dinosaur)
   end
 
   def destroy
-    authorize @dinosaur
     @dinosaur = Dinosaur.find(params[:id])
+    authorize @dinosaur
     @dinosaur.destroy
-    redirect_to dinosaurs_path, status: :see_other
+    redirect_to dashboard_path, status: :see_other
   end
 
   private
