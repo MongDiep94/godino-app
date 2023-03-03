@@ -1,11 +1,6 @@
 a {
   text-decoration: none!important;
 }
-
-b {
-color: $gray!important;
-}
-
 .cards {
   display: flex;
   grid-gap: 16px;
@@ -17,11 +12,12 @@ color: $gray!important;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 4px;
+  min-height: 300px;
 }
 
 .card-dino > img {
   height: 200px;
-  width: 100%;
+  width: 300px;
   object-fit: cover;
 }
 
