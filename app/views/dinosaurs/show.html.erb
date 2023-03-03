@@ -57,8 +57,14 @@
                     action: "submit->insert-in-list#send"
                   }) do |f|
                 %>
-                <%= f.input :content %>
-                <%= f.button :submit %>
+                <div class="row align-items-center mb-3 mt-3">
+                      <div class="col-6">
+                        <div class = "row align-items-baseline">
+                          <i class="fa-regular fa-face-smile fa-2xl col-auto align-self-center"></i>
+                          <p class="col text-justify"><%= f.input :content %> <%= f.button :submit %></p>
+                        </div>
+                      </div>
+                    </div>
               <% end %>
             </div>
       </div>
