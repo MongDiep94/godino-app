@@ -5,7 +5,7 @@
       <%= cl_image_tag @dinosaur.photo.key, crop: :fill, class: :profile_picture %>
       <div class = "row justify-content-start align-items-center">
         <h1 class="col-10 mb-3 mt-3"><%=@dinosaur.name%>, the <%=@dinosaur.species.capitalize%></h1>
-        <h3 class="col mb-3 mt-3 justify-content-right">⭐ <%= @dinosaur.review%>/5</h3>
+        <h3 class="col mb-3 mt-3 justify-content-right">⭐ <%= @dinosaur.rating%>/5</h3>
       </div>
         <ul class="list-group list-group-horizontal">
           <li class="list-group-item">
@@ -34,35 +34,33 @@
           <hr class="rounded mt-3">
         </div>
       <div class="row mb-10">
-        <h6 class="mt-3"> <strong>4 Comments</strong></h6>
-        <div class="row align-items-center mb-3 mt-3">
-          <div class="col-6">
-            <div class = "row align-items-baseline">
-              <i class="fa-regular fa-face-smile fa-2xl col-auto align-self-center"></i>
-              <p class="col text-justify">Suspendisse porta enim a libero congue, ut consectetur tellus volutpat. Nam quis dolor in arcu aliquet dignissim. Maecenas ultricies feugiat odio, in finibus nulla accumsan vel. Praesent fermentum et velit sit amet imperdiet.</p>
+            <div data-controller="insert-in-list" data-insert-in-list-position-value="afterbegin">
+              <div data-insert-in-list-target="items">
+              <% if @dinosaur.reviews.blank? %>
+                Be the first to leave a review for <%= @dinosaur.name %>
+              <% else %>
+                <% @dinosaur.reviews.each do |review| %>
+                    <div class="row align-items-center mb-3 mt-3">
+                      <div class="col-6">
+                        <div class = "row align-items-baseline">
+                          <i class="fa-regular fa-face-smile fa-2xl col-auto align-self-center"></i>
+                          <p class="col text-justify"><%= review.content %></p>
+                        </div>
+                      </div>
+                    </div>
+                <% end %>
+              <% end %>
+              </div>
+              <%= simple_form_for([@dinosaur, @review],
+                  data: {
+                    insert_in_list_target: "form",
+                    action: "submit->insert-in-list#send"
+                  }) do |f|
+                %>
+                <%= f.input :content %>
+                <%= f.button :submit %>
+              <% end %>
             </div>
-          </div>
-          <div class="col-6">
-            <div class = "row align-items-baseline">
-              <i class="fa-regular fa-face-smile fa-2xl col-auto align-self-center"></i>
-              <p class="col text-justify">Suspendisse porta enim a libero congue, ut consectetur tellus volutpat. Nam quis dolor in arcu aliquet dignissim. Maecenas ultricies feugiat odio, in finibus nulla accumsan vel. Praesent fermentum et velit sit amet imperdiet.</p>
-            </div>
-          </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="col-6">
-            <div class = "row align-items-baseline">
-              <i class="fa-regular fa-face-smile fa-2xl col-auto align-self-center"></i>
-              <p class="col text-justify">Suspendisse porta enim a libero congue, ut consectetur tellus volutpat. Nam quis dolor in arcu aliquet dignissim. Maecenas ultricies feugiat odio, in finibus nulla accumsan vel. Praesent fermentum et velit sit amet imperdiet.</p>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class = "row align-items-baseline">
-              <i class="fa-regular fa-face-smile fa-2xl col-auto align-self-center"></i>
-              <p class="col text-justify">Suspendisse porta enim a libero congue, ut consectetur tellus volutpat. Nam quis dolor in arcu aliquet dignissim. Maecenas ultricies feugiat odio, in finibus nulla accumsan vel. Praesent fermentum et velit sit amet imperdiet.</p>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="text-divider mt-3">
         <hr class="rounded">
@@ -77,13 +75,14 @@
     <div class="col-3 p-4" id="bookingform">
       <div class="mb-6">
           <div class="row align-items-center">
-              <h2 class="col-4"><%= @dinosaur.price %>€</h2>
+              <h3 class="col-4"><%= @dinosaur.price %>€</h3>
               <h6 class="col-4">per day</h6>
           </div>
           <div class="row align-items-center">
-              <h6 class="col-4">⭐ <strong><%= @dinosaur.review %>/5</strong></h6>
-              <h6 class="col-6">4 comments</h6>
+              <h6 class="col-4">⭐ <strong><%= @dinosaur.rating %>/5</strong></h6>
+              <h6 class="col-6"><%= pluralize @dinosaur.reviews.size, "review" %></h6>
           </div>
+
           <hr class="rounded mt-3 mb-3">
           <div>
               <%= simple_form_for [@dinosaur, @booking] do |f| %>
