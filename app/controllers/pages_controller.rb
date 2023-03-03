@@ -9,4 +9,5 @@ class PagesController < ApplicationController
     @dinosaurs = current_user.dinosaurs
     @bookings = current_user.bookings
   end
+
 end
