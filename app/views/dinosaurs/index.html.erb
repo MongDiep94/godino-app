@@ -10,12 +10,12 @@
       </div>
       <% @dinosaurs.each do |dino| %>
         <%= link_to dinosaur_path(dino) do %>
-          <div class="card-dino my-3">
+          <div class="card-dino-index my-3">
             <% if dino.photo.attached? %>
                 <%= cl_image_tag dino.photo.key, crop: :fill%>
             <% end %>
 
-            <div class="card-dino-infos">
+            <div class="card-dino-infos-index">
               <div>
                 <h2><%= dino.name%></h2>
                   <ul>
