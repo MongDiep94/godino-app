@@ -71,7 +71,7 @@ class DinosaursController < ApplicationController
   private
 
   def dinosaurs_params
-    params.require(:dinosaur).permit(:name, :species, :age, :weight, :height, :character, :address, :element, :price, :photo, :review, :user_id)
+    params.require(:dinosaur).permit(:name, :species, :age, :weight, :height, :character, :address, :element, :price, :photo, :review, :rating, :user_id)
   end
 
   def booking_reference
