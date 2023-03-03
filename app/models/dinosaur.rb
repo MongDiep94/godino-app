@@ -23,7 +23,6 @@ class Dinosaur < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_address?
 
   def average_rating
-    return 4
-    # self.bookings.pluck(:rating) / self.bookings.length
+    self.bookings.pluck(:rating) / self.bookings.length
   end
 end
