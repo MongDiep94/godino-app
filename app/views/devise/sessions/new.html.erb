@@ -1,7 +1,8 @@
-<div class="container-new d-grid gap-2">
-
+<div class="div-form-top">
   <h2>Log in</h2>
+</div>
 
+<div class="div-form-body">
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name),
     data: {turbo: false}) do |f| %>
       <%= f.input :email,
@@ -12,12 +13,14 @@
                   required: false,
                   input_html: { autocomplete: "current-password" } %>
       <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-    </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Log in" %>
+      <div class="btn-new">
+        <%= f.button :submit, "Log in" %>
+      </div>
     </div>
   <% end %>
 
-  <%= render "devise/shared/links" %>
+    <%= render "devise/shared/links" %>
+  </div>
 </div>

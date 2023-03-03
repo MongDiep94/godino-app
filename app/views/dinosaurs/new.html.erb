@@ -1,18 +1,49 @@
-<div class="container-new d-grid gap-2">
+<div class="div-form-top">
   <h2 class="mb-2">Create your Dino's profile <i class="fa-solid fa-paw"></i></h2>
-  <hr />
+</div>
+
+<div class="div-form-body">
   <%= simple_form_for(@dinosaur) do |f| %>
-    <%= f.input :name %> <%= f.input :species %>
-    <%= f.input :age, placeholder: 'M years old' %>
-    <%= f.input :weight, placeholder: 'tonne' %>
-    <%= f.input :height, placeholder: 'km' %>
-    <%= f.input :character%>
-    <%= f.input :address%>
-    <%= f.input :element, collection: ["earth", "water", "wind", "fire"] %>
-    <%= f.input :price, placeholder: '€'%>
-    <%= f.input :photo, as: :file %>
-    <div class="d-grid mt-3 btn btn-new">
-    <%= f.button :submit %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :name %>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :species %>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :age, placeholder: 'M years old' %>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :weight, placeholder: 'tonne' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :height, placeholder: 'km' %>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :character%>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :element, collection: ["earth", "water", "wind", "fire"] %>
+      </div>
+      <div class="col-md-6">
+      <%= f.input :price, placeholder: '€'%>
+        </div>
+      </div>
+      <div class="row">
+        <%= f.input :address, placeholder: 'example: 1 Street NameStreet ZipCode Paris'%>
+      </div>
+      <div class="row">
+        <%= f.input :photo, as: :file %>
+      </div>
+      <div class="row btn-new">
+        <%= f.button :submit %>
+      </div>
   <% end %>
 </div>
