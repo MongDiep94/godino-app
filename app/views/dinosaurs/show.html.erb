@@ -36,20 +36,19 @@
       <div class="row mb-10">
             <div data-controller="insert-in-list" data-insert-in-list-position-value="afterbegin">
               <div data-insert-in-list-target="items">
-              <% if @dinosaur.reviews.blank? %>
-                Be the first to leave a review for <%= @dinosaur.name %>
-              <% else %>
-                <% @dinosaur.reviews.each do |review| %>
-                    <div class="row align-items-center mb-3 mt-3">
-                      <div class="col-6">
-                        <div class = "row align-items-baseline">
-                          <i class="fa-regular fa-face-smile fa-2xl col-auto align-self-center"></i>
-                          <p class="col text-justify"><%= review.content %></p>
+                <% if @dinosaur.reviews.blank? %>
+                  <p> Be the first to leave a review for <%= @dinosaur.name %></p>
+                <% else %>
+                  <% @dinosaur.reviews.each do |review| %>
+                      <div class="row align-items-center mb-3 mt-3">
+                        <div class="col-6">
+                          <div class = "row align-items-baseline">
+                            <p class="col text-justify"><%= review.content %></p>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                  <% end %>
                 <% end %>
-              <% end %>
               </div>
               <%= simple_form_for([@dinosaur, @review],
                   data: {
@@ -58,10 +57,9 @@
                   }) do |f|
                 %>
                 <div class="row align-items-center mb-3 mt-3">
-                      <div class="col-6">
-                        <div class = "row align-items-baseline">
-                          <i class="fa-regular fa-face-smile fa-2xl col-auto align-self-center"></i>
-                          <p class="col text-justify"><%= f.input :content %> <%= f.button :submit %></p>
+                      <div class="col-12">
+                        <div class = "row justify-content-center">
+                          <%= f.input :content, class:"w-100"%> <%= f.button :submit, class:"btn btn-flat"%>
                         </div>
                       </div>
                     </div>
