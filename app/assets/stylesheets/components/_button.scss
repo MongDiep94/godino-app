@@ -10,7 +10,7 @@
   #btn-scrollUp i {
     color :$blue;
     height: 80px;
-    }
+  }
 
 .btn-flat {
   color: white;
@@ -72,6 +72,22 @@
 }
 
 .btn-navbar:hover {
-  background: linear-gradient($orange, $dark-orange);
+  background: $dark-orange;
+  color: white;
+}
+
+.btn-navbar-login {
+  color: white;
+  padding: 8px 24px;
+  border-radius: 4px;
+  background: $light-blue;
+  transition: background 0.3s ease;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+}
+
+.btn-navbar-login:hover {
+  background: $blue;
   color: white;
 }
